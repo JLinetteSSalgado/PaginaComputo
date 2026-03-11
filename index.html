@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Hola, esta es mi presentación</h1>
+
+    <section class="productos">
+      <h2>Temas de la presentación</h2>
+      <label for="productos">Selecciona un tema:</label>
+      <select id="productos">
+        <option value="">Selecciona</option>
+        <option value="1">Introducción</option>
+        <option value="2">Objetivos</option>
+        <option value="3">Desarrollo del tema</option>
+        <option value="4">Conclusiones</option>
+        <option value="5">Preguntas</option>
+      </select>
+      <button id="btn-agregar" class="btn">Mostrar</button>
+    </section>
+
+    <section id="carrito-section" class="carrito">
+      <h2>Contenido</h2>
+      <table id="tabla-carrito" style="display:none;">
+        <thead>
+          <tr>
+            <th>Tema</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody id="carrito"></tbody>
+      </table>
+      <p id="total" style="display:none;"></p>
+      <button id="btn-comprar" class="btn" style="display:none;">Siguiente</button>
+    </section>
+  </div>
+
+  <script>
+    const temas = {
+      1: {
+        nombre: "Introducción",
+        descripcion: "En esta sección se presenta el tema principal y el contexto general de la presentación."
+      },
+      2: {
+        nombre: "Objetivos",
+        descripcion: "Aquí se explican los objetivos que se buscan alcanzar con esta presentación."
+      },
+      3: {
+        nombre: "Desarrollo del tema",
+        descripcion: "Se explica el contenido principal, información importante y ejemplos relacionados."
+      },
+      4: {
+        nombre: "Conclusiones",
+        descripcion: "Se resumen los puntos más importantes y se presentan los resultados obtenidos."
+      },
+      5: {
+        nombre: "Preguntas",
+        descripcion: "Espacio para resolver dudas o preguntas sobre el tema presentado."
+      }
+    };
+
+    const select = document.getElementById("productos");
+    const boton = document.getElementById("btn-agregar");
+    const tabla = document.getElementById("tabla-carrito");
+    const tbody = document.getElementById("carrito");
+
+    boton.addEventListener("click", () => {
+      const valor = select.value;
+
+      if (!valor) {
+        Swal.fire("Selecciona un tema primero");
+        return;
+      }
+
+      const tema = temas[valor];
+
+      tabla.style.display = "table";
+      tbody.innerHTML = `
+        <tr>
+          <td>${tema.nombre}</td>
+          <td>${tema.descripcion}</td>
+        </tr>
+      `;
+    });
+  </script>
+</body>
+</html>
